@@ -22,6 +22,22 @@ class _UserImagePickerState extends State<UserImagePicker> {
           radius: 40,
           backgroundColor: Colors.grey,
         ),
+        TextButton(
+          onPressed: () {},
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.image,
+                color: Theme.of(context).primaryColor,
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Text('Adicionar Imagem')
+            ],
+          ),
+        ),
       ],
     );
   }

@@ -47,7 +47,7 @@ class _AuthFormState extends State<AuthForm> {
     return Card(
       margin: EdgeInsets.all(20),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
         child: Form(
           key: _formKey,
           child: Column(
@@ -61,7 +61,10 @@ class _AuthFormState extends State<AuthForm> {
                   key: ValueKey('name'),
                   initialValue: _formData.name,
                   onChanged: (name) => _formData.name = name,
-                  decoration: InputDecoration(labelText: 'Nome'),
+                  decoration: InputDecoration(
+                    labelText: 'Nome',
+                    border: OutlineInputBorder(),
+                  ),
                   validator: (_name) {
                     final name = _name ?? 'Nome';
                     if (name.trim().length < 5) {
@@ -70,25 +73,37 @@ class _AuthFormState extends State<AuthForm> {
                     return null;
                   },
                 ),
-              TextFormField(
-                initialValue: _formData.email,
-                onChanged: (email) => _formData.email = email,
-                key: ValueKey('email'),
-                decoration: InputDecoration(labelText: 'E-mail'),
-                validator: (_email) {
-                  final email = _email ?? 'Nome';
-                  if (!email.contains('@')) {
-                    return 'E-mail informado não é válido.';
-                  }
-                  return null;
-                },
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 10,
+                  bottom: 10,
+                ),
+                child: TextFormField(
+                  initialValue: _formData.email,
+                  onChanged: (email) => _formData.email = email,
+                  key: ValueKey('email'),
+                  decoration: InputDecoration(
+                    labelText: 'E-mail',
+                    border: OutlineInputBorder(),
+                  ),
+                  validator: (_email) {
+                    final email = _email ?? 'Nome';
+                    if (!email.contains('@')) {
+                      return 'E-mail informado não é válido.';
+                    }
+                    return null;
+                  },
+                ),
               ),
               TextFormField(
                 initialValue: _formData.password,
                 onChanged: (password) => _formData.password = password,
                 key: ValueKey('password'),
                 obscureText: true,
-                decoration: InputDecoration(labelText: 'Senha'),
+                decoration: InputDecoration(
+                  labelText: 'Senha',
+                  border: OutlineInputBorder(),
+                ),
                 validator: (_password) {
                   final password = _password ?? 'Nome';
                   if (password.length < 6) {
@@ -98,9 +113,14 @@ class _AuthFormState extends State<AuthForm> {
                 },
               ),
               SizedBox(height: 12),
-              ElevatedButton(
-                onPressed: _submit,
-                child: Text(_formData.isLogin ? 'Entrar' : 'Cadastrar'),
+              Container(
+                width: 400,
+                height: 50,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(),
+                  onPressed: _submit,
+                  child: Text(_formData.isLogin ? 'Entrar' : 'Cadastrar'),
+                ),
               ),
               TextButton(
                 child: Text(

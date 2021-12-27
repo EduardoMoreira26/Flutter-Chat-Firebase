@@ -5,14 +5,14 @@ class ChatMessage {
 
   final String userId;
   final String userName;
-  final DateTime userImageURL;
+  final String userImageURL;
 
-  ChatMessage(
+  const ChatMessage({
     this.id,
     this.text,
     this.createdAt,
     this.userId,
     this.userName,
     this.userImageURL,
-  );
+  });
 }

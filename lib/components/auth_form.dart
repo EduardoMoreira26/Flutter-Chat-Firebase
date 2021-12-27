@@ -130,7 +130,7 @@ class _AuthFormState extends State<AuthForm> {
                 ),
                 onPressed: () {
                   setState(() {
-                    _formData.toogleAuthMode();
+                    _formData.toggleAuthMode();
                   });
                 },
               ),

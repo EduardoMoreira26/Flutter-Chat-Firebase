@@ -1,5 +1,5 @@
 import 'package:chat/components/messages.dart';
-import 'package:chat/components/new_messages.dart';
+import 'package:chat/components/new_message.dart';
 import 'package:chat/core/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 

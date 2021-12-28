@@ -5,10 +5,43 @@ class MessageBubble extends StatelessWidget {
   final ChatMessage message;
   final bool belongsToCurrentUser;
 
-  const MessageBubble({Key key, this.message, this.belongsToCurrentUser}) : super(key: key);
+  const MessageBubble({Key key, this.message, this.belongsToCurrentUser})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Text(message.text);
+    return Row(
+      mainAxisAlignment: belongsToCurrentUser
+          ? MainAxisAlignment.end
+          : MainAxisAlignment.start,
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            color: belongsToCurrentUser
+                ? Colors.grey.shade300
+                : Theme.of(context).accentColor,
+            borderRadius: BorderRadius.all(
+              Radius.circular(12),
+            ),
+          ),
+          width: 180,
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+          child: Column(
+            children: [
+              Text(
+                message.userName,
+                style: TextStyle(
+                    color: belongsToCurrentUser ? Colors.black : Colors.white),
+              ),
+              Text(
+                message.text,
+                 style: TextStyle(
+                    color: belongsToCurrentUser ? Colors.black : Colors.white),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }

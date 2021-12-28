@@ -20,22 +20,32 @@ class MessageBubble extends StatelessWidget {
             color: belongsToCurrentUser
                 ? Colors.grey.shade300
                 : Theme.of(context).accentColor,
-            borderRadius: BorderRadius.all(
-              Radius.circular(12),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(12),
+              topRight: Radius.circular(12),
+              bottomLeft: belongsToCurrentUser
+                  ? Radius.circular(12)
+                  : Radius.circular(0),
+              bottomRight: belongsToCurrentUser
+                  ? Radius.circular(0)
+                  : Radius.circular(12),
             ),
           ),
           width: 180,
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+          margin: EdgeInsets.symmetric(vertical: 15, horizontal: 8),
           child: Column(
             children: [
               Text(
                 message.userName,
                 style: TextStyle(
-                    color: belongsToCurrentUser ? Colors.black : Colors.white),
+                  color: belongsToCurrentUser ? Colors.black : Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               Text(
                 message.text,
-                 style: TextStyle(
+                style: TextStyle(
                     color: belongsToCurrentUser ? Colors.black : Colors.white),
               ),
             ],

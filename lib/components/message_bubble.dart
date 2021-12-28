@@ -8,23 +8,25 @@ class MessageBubble extends StatelessWidget {
   final ChatMessage message;
   final bool belongsToCurrentUser;
 
-  const MessageBubble({Key key, this.message, this.belongsToCurrentUser})
-      : super(key: key);
+  const MessageBubble({
+    Key key,
+    this.message,
+    this.belongsToCurrentUser,
+  }) : super(key: key);
 
   Widget _showUserImage(String imageURL) {
     ImageProvider provider;
     final uri = Uri.parse(imageURL);
 
-    if(uri.path.contains(_defaultImage)) {
-      provider = AssetImage(_defaultImage);
-    } else if (uri.scheme.contains("http")) {
+    if (uri.path.contains(_defaultImage)) {
+      provider = const AssetImage(_defaultImage);
+    } else if (uri.scheme.contains('http')) {
       provider = NetworkImage(uri.toString());
     } else {
       provider = FileImage(File(uri.toString()));
     }
 
     return CircleAvatar(
-      // backgroundColor: Colors.pink,
       backgroundImage: provider,
     );
   }
@@ -42,23 +44,31 @@ class MessageBubble extends StatelessWidget {
               decoration: BoxDecoration(
                 color: belongsToCurrentUser
                     ? Colors.grey.shade300
-                    : Theme.of(context).accentColor,
+                    : Theme.of(context).colorScheme.primary,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(12),
-                  topRight: Radius.circular(12),
+                  topLeft: const Radius.circular(12),
+                  topRight: const Radius.circular(12),
                   bottomLeft: belongsToCurrentUser
-                      ? Radius.circular(12)
-                      : Radius.circular(0),
+                      ? const Radius.circular(12)
+                      : const Radius.circular(0),
                   bottomRight: belongsToCurrentUser
-                      ? Radius.circular(0)
-                      : Radius.circular(12),
+                      ? const Radius.circular(0)
+                      : const Radius.circular(12),
                 ),
               ),
               width: 180,
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-              margin: EdgeInsets.symmetric(vertical: 15, horizontal: 8),
+              padding: const EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 16,
+              ),
+              margin: const EdgeInsets.symmetric(
+                vertical: 15,
+                horizontal: 8,
+              ),
               child: Column(
-                crossAxisAlignment: belongsToCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                crossAxisAlignment: belongsToCurrentUser
+                    ? CrossAxisAlignment.end
+                    : CrossAxisAlignment.start,
                 children: [
                   Text(
                     message.userName,
@@ -69,10 +79,11 @@ class MessageBubble extends StatelessWidget {
                   ),
                   Text(
                     message.text,
-                    textAlign: belongsToCurrentUser ? TextAlign.right : TextAlign.left,
+                    textAlign:
+                        belongsToCurrentUser ? TextAlign.right : TextAlign.left,
                     style: TextStyle(
-                        color:
-                            belongsToCurrentUser ? Colors.black : Colors.white),
+                      color: belongsToCurrentUser ? Colors.black : Colors.white,
+                    ),
                   ),
                 ],
               ),

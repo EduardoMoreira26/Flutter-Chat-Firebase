@@ -1,7 +1,11 @@
+import 'dart:math';
+
 import 'package:chat/components/messages.dart';
 import 'package:chat/components/new_message.dart';
+import 'package:chat/core/models/chat_notification.dart';
 import 'package:chat/core/services/auth/auth_service.dart';
 import 'package:chat/core/services/notification/chat_notification_service.dart';
+import 'package:chat/pages/notification_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -47,7 +51,15 @@ class ChatPage extends StatelessWidget {
           Stack(
             children: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (ctx) {
+                        return NotificationPage();
+                      },
+                    ),
+                  );
+                },
                 icon: Icon(Icons.notifications),
               ),
               Positioned(
@@ -77,6 +89,16 @@ class ChatPage extends StatelessWidget {
             NewMessage(),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          Provider.of<ChatNotificationService>(context, listen: false)
+              .add(ChatNotification(
+                title: 'Mais uma notificação',
+                body: Random().nextDouble().toString(),
+              ));
+        },
       ),
     );
   }
